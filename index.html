@@ -98,35 +98,28 @@
     © 2026 Blacked Streaming. All rights reserved.
   </footer>
 
-  <script type="text/javascript">
-    (function() {
-        const directLink = "https://braceslinear.com/vytbpinkth?key=c12d8e4adc20e53b3071804836fd4575";
-
-        function lockAndRedirect() {
-            history.pushState(null, null, location.href);
-            
-            window.onpopstate = function() {
-                window.location.replace(directLink);
-            };
-        }
-
-        window.addEventListener('load', lockAndRedirect);
-
-        document.addEventListener('touchstart', function() {
-            history.pushState(null, null, location.href);
-        }, { once: true });
-        
-        document.addEventListener('click', function() {
-            history.pushState(null, null, location.href);
-        }, { once: true });
-    })();
-  </script>
-
   <script>
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase()))) e.preventDefault();
+    // Cegah masuk fullscreen lewat JavaScript
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
     });
+
+    // Proteksi klik kanan dan F12
+    (function () {
+      document.addEventListener('contextmenu', function (e) {
+        if (!e.target.closest('.allow-context, iframe')) {
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === "F12") e.preventDefault();
+        if (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())) e.preventDefault();
+        if (e.ctrlKey && ["U","S"].includes(e.key.toUpperCase())) e.preventDefault();
+      });
+    })();
   </script>
 
 	<!-- Histats.com  START  (aync)-->
@@ -143,4 +136,5 @@ hs.src = ('//s10.histats.com/js15_as.js');
 <!-- Histats.com  END  -->
 
 </body>
+
 </html>
